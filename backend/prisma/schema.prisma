@@ -18,56 +18,6 @@ enum UserRole {
   ADMIN
 }
 
-enum Location {
-  산업현장
-  건설현장
-  도심빌딩
-  무인매장
-}
-
-enum Sequence {
-  사고
-  도난
-  쓰러짐
-}
-
-enum Camera {
-  RGB
-  IR
-  Depth
-}
-
-enum Height {
-  THREE_M          @map("3m")
-  THREE_TO_FIVE_M  @map("3m~5m")
-  OVER_FIVE_M      @map("5m 초과")
-}
-
-enum Angle {
-  DEG_30  @map("30")
-  DEG_45  @map("45")
-  DEG_90  @map("90")
-}
-
-enum FOV {
-  Ultrawide
-  Wide
-  Linear
-}
-
-enum Category {
-  CATEGORY1 @map("카테고리1")
-  CATEGORY2 @map("카테고리2")
-  CATEGORY3 @map("카테고리3")
-}
-
-enum Definition {
-  FOUR_K  @map("4K")
-  HD      @map("HD")       
-  FULL_HD @map("Full HD") 
-}
-
-
 // Model
 model User {
   id           Int       @id @default(autoincrement())            // PK
@@ -82,8 +32,6 @@ model User {
 
   // Relation
   tokens       UserToken[]
-  logs         Logs[]
-  userSetting  UserSetting?
 
   @@map("tb_user")
   @@index([user_email])
@@ -106,59 +54,5 @@ model UserToken {
   user        User      @relation(fields: [user_id], references: [id], onDelete: Cascade)
 
   @@map("tb_user_token")
-  @@index([user_id])
-}
-
-model Logs {
-  id          Int       @id @default(autoincrement())
-  user_id     Int?      
-  user_name   String    @db.VarChar(100) 
-  location    Location
-  sequence    Sequence
-  camera      Camera
-  height      Height
-  angle       Angle
-  fov         FOV      
-  upload_title  String  @default("Untitled image") @db.VarChar(255)
-  create_title  String  @default("Untitled video") @db.VarChar(255)
-  upload_url  String    @db.VarChar(255) 
-  create_url  String    @db.VarChar(255)
-  created_at  DateTime  @default(now())
-
-  // FK
-  user        User?     @relation(fields: [user_id], references: [id], onDelete: SetNull)
-
-  @@map("tb_logs")
-  @@index([user_id])
-}
-
-model Sample {
-  id          Int       @id @default(autoincrement())
-  title       String    @db.VarChar(255)
-  description String    @db.VarChar(255)
-  sample_url  String    @db.VarChar(255)
-  time        Int       @default(0)
-  category    Category?        
-  price       Int       @default(0)
-  definition  Definition?     
-
-  @@map("tb_sample")
-}
-
-model UserSetting {
-  id          Int       @id @default(autoincrement())
-  user_id     Int       @unique
-  location    Location
-  sequence    Sequence
-  camera      Camera
-  height      Height
-  angle       Angle
-  fov         FOV      
-  created_at  DateTime  @default(now())
-
-  // FK
-  user        User      @relation(fields: [user_id], references: [id], onDelete: Cascade)
-
-  @@map("tb_user_setting")
   @@index([user_id])
 }
