@@ -4,8 +4,6 @@ import cors from "cors";
 import { errorHandler } from "./middlewares/errorHandler";
 import authRouter from "./modules/auth/auth.router";
 import usersRouter from "./modules/users/users.router";
-import userSettingsRouter from "./modules/userSettings/userSettings.router";
-import logsRouter from "./modules/logs/logs.router";
 
 export const createApp = () => {
   const app = express();
@@ -22,8 +20,6 @@ export const createApp = () => {
   // modules
   app.use("/api/auth", authRouter);
   app.use("/api/users", usersRouter);
-  app.use("/api/logs", logsRouter);
-  app.use("/api/userSettings", userSettingsRouter);
   // common middlewares
   app.use(errorHandler);
 
