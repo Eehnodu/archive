@@ -1,0 +1,6 @@
+# dependencies & build
+node_modules/
+dist/
+
+# prisma client (custom output을 src에 둘 때)
+src/generated/prisma/

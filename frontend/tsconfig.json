@@ -1,0 +1,23 @@
+{
+  "compilerOptions": {
+    "target": "ES2022",
+    "jsx": "react-jsx",
+    // DOM 타입 포함 (브라우저/테스트 JSX에서 필요)
+    "lib": ["ES2022", "DOM"],
+
+    // 테스트/브라우저 전역 타입 인식
+    "types": ["vite/client", "vitest/globals"],
+
+    "baseUrl": "./src",
+    "paths": {
+      "@/*": ["*"],
+      "container/*": ["container/*"]
+    },
+
+    "module": "ESNext",
+    "moduleResolution": "bundler",
+    "noEmit": true
+  },
+  // 테스트/설정 파일을 컴파일 대상에 포함
+  "include": ["src", "vite.config.ts", "vitest.config.ts", "src/test/setup.ts"]
+}
