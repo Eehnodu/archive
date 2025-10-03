@@ -17,7 +17,7 @@ const AdminLogin = () => {
         <div className="rounded-2xl bg-white/90 backdrop-blur shadow-xl ring-1 ring-black/5 p-8">
           <header className="mb-6 text-center">
             <h1 className="text-2xl font-semibold tracking-tight">
-              관리자 로그인
+              로그인
             </h1>
           </header>
           <LoginForm />

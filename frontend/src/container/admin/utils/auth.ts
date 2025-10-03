@@ -20,4 +20,4 @@ export const parseUserInfo = (): UserInfo | null => {
   }
 };
 
-export const isAdmin = (user: UserInfo | null) => user?.role === "admin";
+export const isAdmin = (user: UserInfo | null) => user?.role === "ADMIN";

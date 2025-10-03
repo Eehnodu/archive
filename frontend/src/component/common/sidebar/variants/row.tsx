@@ -21,7 +21,10 @@ const Row = ({ to, label, variant }: Props) => {
       : "text-main/80 hover:bg-main/5 hover:text-main";
 
   return (
-    <div onClick={() => navigate(to)} className={[base, cls].join(" ")}>
+    <div
+      onClick={() => navigate(to)}
+      className={[base, cls, "whitespace-nowrap truncate min-w-0"].join(" ")}
+    >
       {label}
     </div>
   );

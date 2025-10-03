@@ -9,21 +9,7 @@ type Props = {
 
 const PasswordInput = ({ value, onChange }: Props) => {
   const [showPw, setShowPw] = useState(false);
-  const [capsLock, setCapsLock] = useState(false);
   const inputRef = useRef<HTMLInputElement | null>(null);
-
-  useEffect(() => {
-    const el = inputRef.current;
-    if (!el) return;
-    const handleKey = (e: KeyboardEvent) =>
-      setCapsLock(e.getModifierState("CapsLock"));
-    el.addEventListener("keyup", handleKey);
-    el.addEventListener("keydown", handleKey);
-    return () => {
-      el.removeEventListener("keyup", handleKey);
-      el.removeEventListener("keydown", handleKey);
-    };
-  }, []);
 
   return (
     <div className="flex flex-col gap-1">
@@ -54,11 +40,6 @@ const PasswordInput = ({ value, onChange }: Props) => {
           )}
         </ButtonTransparent>
       </div>
-      {capsLock && (
-        <p className="flex items-center gap-1 text-xs text-amber-600 mt-1">
-          <AlertCircle className="w-4 h-4" />
-        </p>
-      )}
     </div>
   );
 };

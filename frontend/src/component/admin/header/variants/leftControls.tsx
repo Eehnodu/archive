@@ -9,12 +9,15 @@ const LeftControls = ({ mode, onToggle }: Props) => {
   const title = mode === "archive" ? "아카이브 관리" : "Unknown Mode";
 
   return (
-    <div className="w-1/3 flex flex-row gap-4 text-xl font-bold px-8">
-      <button onClick={onToggle}>
-        <img src={burger} alt="햄버거" className="w-6 h-5" />
+    <div className="w-full wxl:w-1/3 flex items-center gap-3 px-4 text-xl font-bold">
+      <button onClick={onToggle} className="shrink-0">
+        <img src={burger} alt="햄버거" className="w-5 h-5 block" />
       </button>
-      <div className="flex flex-row w-full justify-between items-center">
-        <span>{title}</span>
+
+      <div className="flex-1 min-w-0 flex items-center">
+        <span className="whitespace-nowrap break-keep truncate text-base wxl:text-xl font-bold">
+          {title}
+        </span>
       </div>
     </div>
   );

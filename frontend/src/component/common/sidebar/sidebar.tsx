@@ -58,13 +58,14 @@ const Sidebar: FC<SidebarProps> = ({
     <aside
       className={[
         "h-full transition-all duration-300 ease-in-out",
-        toggle ? "w-72" : "w-0 overflow-hidden",
+        "flex-shrink-0 overflow-hidden",
+        toggle ? "w-64" : "w-0",
         className ?? "",
       ].join(" ")}
     >
       <div className={shell}>
         <Header title={title} logoSrc={logoSrc} variant={variant} />
-        <div className={bodyPad}>{renderMenu(menu, variant)}</div>
+        <div className={[bodyPad, "min-w-0"].join(" ")}>{renderMenu(menu, variant)}</div>
       </div>
     </aside>
   );

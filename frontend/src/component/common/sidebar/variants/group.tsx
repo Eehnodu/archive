@@ -13,9 +13,9 @@ const Group = ({ title, children, variant }: Props) => {
       : "px-3 pb-2 text-left text-main/90 font-medium text-sm border-b border-main/10";
 
   return (
-    <div className="w-full pb-3">
-      {title && <div className={titleCls}>{title}</div>}
-      <div className="mt-2 flex flex-col">{children}</div>
+    <div className="w-full pb-3 min-w-0">
+      {title && <div className={[titleCls, "whitespace-nowrap truncate"].join(" ")}>{title}</div>}
+      <div className="mt-2 flex flex-col min-w-0">{children}</div>
     </div>
   );
 };

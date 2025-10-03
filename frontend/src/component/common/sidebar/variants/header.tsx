@@ -16,7 +16,9 @@ const Header = ({ title, logoSrc, variant }: Props) => {
         {logoSrc && (
           <img src={logoSrc} alt="Logo" className="w-8 h-8 rounded-full" />
         )}
-        {title && <span className={titleClass}>{title}</span>}
+        <span className={[titleClass, "whitespace-nowrap truncate max-w-[12rem]"].join(" ")}>
+          {title}
+        </span>
       </div>
     </div>
   );

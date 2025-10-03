@@ -1,17 +1,17 @@
+// component/admin/header/index.tsx
 import { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { usePost } from "@/hooks/auth/useAPI";
-
 import LeftControls from "./variants/leftControls";
 import LogoutButton from "./variants/logoutButton";
 import LogoutModal from "./variants/logoutModal";
 
 interface AdminHeaderProps {
   mode: string;
-  setToggleSidebar: React.Dispatch<React.SetStateAction<boolean>>;
+  onToggle: () => void; // 단일 토글 콜백
 }
 
-const AdminHeader = ({ mode, setToggleSidebar }: AdminHeaderProps) => {
+export const AdminHeader = ({ mode, onToggle }: AdminHeaderProps) => {
   const logoutMutation = usePost("api/auth/logout");
   const navigate = useNavigate();
   const [logoutModal, setLogoutModal] = useState(false);
@@ -29,8 +29,8 @@ const AdminHeader = ({ mode, setToggleSidebar }: AdminHeaderProps) => {
   };
 
   return (
-    <div className="flex flex-row items-center justify-between w-full p-5 pl-0 bg-[#F5F5F5]">
-      <LeftControls mode={mode} onToggle={() => setToggleSidebar((v) => !v)} />
+    <div className="flex items-center justify-between w-full p-5 pl-0 bg-sub2/60">
+      <LeftControls mode={mode} onToggle={onToggle} />
       <LogoutButton onClick={() => setLogoutModal(true)} />
       <LogoutModal
         open={logoutModal}
@@ -40,5 +40,6 @@ const AdminHeader = ({ mode, setToggleSidebar }: AdminHeaderProps) => {
     </div>
   );
 };
+
 
 export default AdminHeader;

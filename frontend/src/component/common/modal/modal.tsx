@@ -1,15 +1,16 @@
-import { useEffect, useRef, type ReactNode } from "react";
+import { useEffect, useRef, useState, type ReactNode } from "react";
+import { createPortal } from "react-dom";
 import Header from "./variants/header";
 import Body from "./variants/body";
 import Footer from "./variants/footer";
 
 export type ModalProps = {
-  numbers?: 1 | 2; // 버튼 개수
+  numbers?: 1 | 2;
   title?: string;
-  description?: string; // 본문
-  warning?: string; // 경고문구(작게, 빨강)
+  description?: string;
+  warning?: string;
   primaryLabel?: string;
-  secondaryLabel?: string; // numbers === 2일 때만 표시
+  secondaryLabel?: string;
   onClose: () => void;
   onPrimary?: () => void;
   onSecondary?: () => void;
@@ -32,26 +33,28 @@ const Modal = ({
 }: ModalProps) => {
   const overlayRef = useRef<HTMLDivElement | null>(null);
   const dialogRef = useRef<HTMLDivElement | null>(null);
+  const [mounted, setMounted] = useState(false);
+
+  // hydrate 후에만 Portal 렌더
+  useEffect(() => setMounted(true), []);
 
   // 마운트 동안 스크롤 잠금
   useEffect(() => {
     const original = document.body.style.overflow;
     document.body.style.overflow = "hidden";
-    return () => {
-      document.body.style.overflow = original;
-    };
+    return () => { document.body.style.overflow = original; };
   }, []);
 
   // ESC 닫기
   useEffect(() => {
-    const onKey = (e: KeyboardEvent) => {
-      if (e.key === "Escape") onClose();
-    };
+    const onKey = (e: KeyboardEvent) => { if (e.key === "Escape") onClose(); };
     window.addEventListener("keydown", onKey);
     return () => window.removeEventListener("keydown", onKey);
   }, [onClose]);
 
-  return (
+  if (!mounted) return null;
+
+  const node = (
     <div
       ref={overlayRef}
       onMouseDown={(e) => {
@@ -62,7 +65,8 @@ const Modal = ({
         if (!closeOnOutside) return;
         if (e.currentTarget === e.target) onClose();
       }}
-      className="fixed inset-0 z-50 flex items-center justify-center bg-black/40 backdrop-blur-[1px]"
+      // z-index 넉넉히
+      className="fixed inset-0 z-[9999] flex items-center justify-center bg-black/40 backdrop-blur-[1px]"
     >
       <div
         ref={dialogRef}
@@ -74,9 +78,7 @@ const Modal = ({
         onTouchStart={(e) => e.stopPropagation()}
       >
         <Header title={title} icon={icon} onClose={onClose} />
-
         <Body description={description} warning={warning} />
-
         <Footer
           numbers={numbers}
           primaryLabel={primaryLabel}
@@ -88,6 +90,8 @@ const Modal = ({
       </div>
     </div>
   );
+
+  return createPortal(node, document.body);
 };
 
 export default Modal;

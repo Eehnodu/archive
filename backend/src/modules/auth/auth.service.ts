@@ -13,7 +13,7 @@ import {
   revokeAllTokensByUserId,
 } from "./auth.repository";
 import { config } from "@/core/config";
-import { sha256 } from "@/utils/crypto";
+import { sha256, hashPassword } from "@/utils/crypto";
 import { token_dto } from "./auth.schema";
 import {
   login_input,

@@ -23,7 +23,7 @@ const Subrow = ({ to, label, variant }: Props) => {
   return (
     <div
       onClick={() => navigate(to)}
-      className={[base, cls].join(" ")}
+      className={[base, cls, "whitespace-nowrap truncate min-w-0"].join(" ")}
       style={{ paddingLeft: variant === "admin" ? "1.25rem" : "1.5rem" }}
     >
       {label}
