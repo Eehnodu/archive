@@ -20,7 +20,7 @@ const MobileMenuPanel = ({ open, onClose, menu, offsetTop }: Props) => {
             <div
                 className={[
                     "fixed left-0 right-0 z-40",
-                    "transition-transform transition-opacity duration-200 ease-out",
+                    "transition-transform duration-200 ease-out",
                     open ? "translate-y-0 opacity-100" : "-translate-y-2 opacity-0 pointer-events-none",
                 ].join(" ")}
                 style={{ top: offsetTop }}
