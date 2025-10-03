@@ -98,12 +98,12 @@ export async function rotateRefreshTokenService(refresh_token: string) {
     throw new UnauthorizedError("refresh token is expired");
   if (sha256(refresh_token) !== userToken.token_hash)
     throw new UnauthorizedError("refresh token hash mismatch");
+  await revokeAllTokensByUserId(Number(parsed.sub));
   const tokens = await createTokens({
     id: Number(parsed.sub),
     role: parsed.role,
   });
   logger.info(`Tokens created: ${tokens}`);
-  await revokeAllTokensByUserId(Number(parsed.sub));
 
   return { user_id: Number(parsed.sub), role: parsed.role, ...tokens };
 }
