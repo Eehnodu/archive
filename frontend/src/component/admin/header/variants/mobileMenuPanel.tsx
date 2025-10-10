@@ -43,23 +43,21 @@ const MobileMenuPanel = ({ open, onClose, menu, offsetTop }: Props) => {
 
                 {/* 실제 메뉴 박스: 헤더에 '딱 붙게' 위쪽 라운드 제거 */}
                 <div className="relative bg-white border-t border-main/10 shadow-md">
-                    <nav className="py-2">
-                        {menu.map((item) => (
-                            <Link
-                                key={item.to}
-                                to={item.to}
-                                onClick={onClose}
-                                className={[
-                                    "flex items-center justify-between px-4 py-3",
-                                    "text-[15px] font-medium",
-                                    pathname.startsWith(item.to) ? "text-gray-800" : "text-gray-800",
-                                    "hover:bg-sub2/40 active:bg-sub2/60",
-                                ].join(" ")}
-                            >
-                                <span className="break-keep">{item.label}</span>
-                            </Link>
-                        ))}
-                    </nav>
+                    {menu.map((item) => (
+                        <Link
+                            key={item.to}
+                            to={item.to}
+                            onClick={onClose}
+                            className={[
+                                "flex items-center justify-between px-4 py-3 text-[15px] font-medium",
+                                pathname.startsWith(item.to)
+                                    ? "text-gray-900 font-semibold"
+                                    : "text-gray-700 hover:bg-sub2/40 active:bg-sub2/60",
+                            ].join(" ")}
+                        >
+                            <span className="break-keep">{item.label}</span>
+                        </Link>
+                    ))}
                 </div>
             </div>
         </div>

@@ -1,4 +1,3 @@
-// container/admin/layout/AdminShell.tsx
 import { useState, useRef, useLayoutEffect, useEffect } from "react";
 import { Outlet, useLocation } from "react-router-dom";
 import { AdminHeader } from "@/component/admin/header";
@@ -55,13 +54,11 @@ const AdminShell = () => {
         />
       </div>
 
-      {/* 본문 */}
-      <div className="w-full flex flex-col items-stretch px-1 bg-white">
+      <div className="w-full h-full flex flex-col items-stretch px-1 bg-white">
         <div ref={headerRef}>
           <AdminHeader mode={mode} onToggle={handleToggle} />
         </div>
 
-        {/* 모바일 전용: 헤더 바로 아래 패널 */}
         <MobileMenuPanel
           open={mobileOpen}
           onClose={() => setMobileOpen(false)}
@@ -69,7 +66,7 @@ const AdminShell = () => {
           offsetTop={headerH}
         />
 
-        <div className="w-full py-6">
+        <div className="w-full h-full py-6">
           <Outlet />
         </div>
       </div>

@@ -59,7 +59,7 @@ const Sidebar: FC<SidebarProps> = ({
       className={[
         "h-full transition-all duration-300 ease-in-out",
         "flex-shrink-0 overflow-hidden",
-        toggle ? "w-64" : "w-0",
+        toggle ? "w-56" : "w-0",
         className ?? "",
       ].join(" ")}
     >

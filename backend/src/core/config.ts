@@ -2,12 +2,10 @@
 import dotenv from "dotenv";
 import { z } from "zod";
 
-dotenv.config(); // dotenv-expand 없이, 치환은 안 쓴다
+dotenv.config();
 
 const Base = z.object({
-  NODE_ENV: z
-    .enum(["development", "test", "production"])
-    .default("development"),
+  NODE_ENV: z.enum(["development", "test", "production"]).default("development"),
   PORT: z.coerce.number().default(8000),
 
   DB_USER: z.string(),
@@ -19,6 +17,9 @@ const Base = z.object({
   JWT_SECRET: z.string(),
   ACCESS_TTL_SEC: z.coerce.number().default(3600),
   REFRESH_TTL_SEC: z.coerce.number().default(604800),
+
+  GMAIL_USER: z.string(),
+  GMAIL_PASSWORD: z.string(),
 });
 
 const base = Base.parse(process.env);
@@ -35,6 +36,9 @@ const Final = z.object({
   JWT_SECRET: z.string(),
   ACCESS_TTL_SEC: z.coerce.number(),
   REFRESH_TTL_SEC: z.coerce.number(),
+
+  GMAIL_USER: z.string(),
+  GMAIL_PASSWORD: z.string(),
 });
 
 export const config = Final.parse({
@@ -44,4 +48,7 @@ export const config = Final.parse({
   JWT_SECRET: base.JWT_SECRET,
   ACCESS_TTL_SEC: base.ACCESS_TTL_SEC,
   REFRESH_TTL_SEC: base.REFRESH_TTL_SEC,
+
+  GMAIL_USER: base.GMAIL_USER,
+  GMAIL_PASSWORD: base.GMAIL_PASSWORD,
 });

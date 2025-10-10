@@ -29,7 +29,7 @@ export const AdminHeader = ({ mode, onToggle }: AdminHeaderProps) => {
   };
 
   return (
-    <div className="flex items-center justify-between w-full p-5 pl-0 bg-sub2/60">
+    <div className="flex items-center justify-between w-full px-5 py-3 pl-0 bg-sub2/60">
       <LeftControls mode={mode} onToggle={onToggle} />
       <LogoutButton onClick={() => setLogoutModal(true)} />
       <LogoutModal
